@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学生信息</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      text-align: center;
+      /* 整体内容居中 */
+    }
+
+    h1 {
+      color: #007bff;
+      margin-top: 20px;
+    }
+
+    table {
+      margin: 20px auto;
+      /* 表格居中 */
+      border-collapse: collapse;
+      /* 合并边框 */
+      width: 80%;
+      /* 表格宽度 */
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      /* 添加阴影 */
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      /* 表格边框 */
+      padding: 10px;
+      /* 单元格内边距 */
+      text-align: center;
+      /* 单元格内容居中 */
+    }
+
+    th {
+      background-color: #007bff;
+      /* 表头背景色 */
+      color: white;
+      /* 表头文字颜色 */
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+      /* 偶数行背景色 */
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+      /* 鼠标滑过变色 */
+    }
+  </style>
+</head>
+
+<body>
+  <h1>学生信息</h1>
+  <p>以下是学生的详细信息：</p>
+  <table>
+    <tr>
+      <th>序号</th>
+      <th>姓名</th>
+      <th>年龄</th>
+      <th>性别</th>
+      <th>分数</th>
+    </tr>
+
+    <script>
+      // 定义一个存储若干学生信息的数组
+      let students = [
+        {
+          name: '小明',
+          age: 18,
+          gender: '男',
+          score: 90
+        },
+        {
+          name: '小红',
+          age: 18,
+          gender: '女',
+          score: 60
+        },
+        {
+          name: '小林',
+          age: 18,
+          gender: '男',
+          score: 100
+        },
+      ];
+
+      // 遍历数组，输出每个学生的信息
+      for (let i = 0; i < students.length; i++) {
+        let student = students[i];
+
+        document.write('<tr>');
+        // 添加序号列
+        document.write('<td>' + (i + 1) + '</td>');
+        // 遍历学生对象的属性
+        for (let key in student) {
+          document.write('<td>' + student[key] + '</td>');
+        }
+        document.write('</tr>');
+      }
+    </script>
+  </table>
+</body>
+
+</html>

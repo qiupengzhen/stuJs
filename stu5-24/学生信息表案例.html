@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>学生信息管理</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+  <h1>新增学员</h1>
+  <form class="info" autocomplete="off">
+    姓名：<input type="text" class="uname" name="uname" required />
+    年龄：<input type="text" class="age" name="age" required />
+    性别:
+    <select name="gender" class="gender" required>
+      <option value="男">男</option>
+      <option value="女">女</option>
+    </select>
+    薪资：<input type="text" class="salary" name="salary" required />
+    就业城市：<select name="city" class="city" required>
+      <option value="北京">北京</option>
+      <option value="上海">上海</option>
+      <option value="广州">广州</option>
+      <option value="深圳">深圳</option>
+      <option value="曹县">曹县</option>
+    </select>
+    <button class="add">录入</button>
+  </form>
+
+  <h1>就业榜</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>薪资</th>
+        <th>就业城市</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+  <script>
+    // 创建一个数组对象，用于存储学生信息表数据
+    const students = []
+    // 渲染表格函数
+
+    function renderTable() {
+      const tbody = document.querySelector('tbody');
+      tbody.innerHTML = ''; // 清空表格
+      for (let i = 0; i < students.length; i++) {
+        const tr = document.createElement('tr');
+        // 创建并设置内容
+        const td1 = document.createElement('td');
+        td1.innerHTML = i + 1; // 学号
+        const td2 = document.createElement('td');
+        td2.innerHTML = students[i].uname;
+        const td3 = document.createElement('td');
+        td3.innerHTML = students[i].age;
+        const td4 = document.createElement('td');
+        td4.innerHTML = students[i].gender;
+        const td5 = document.createElement('td');
+        td5.innerHTML = students[i].salary;
+        const td6 = document.createElement('td');
+        td6.innerHTML = students[i].city;
+        const td7 = document.createElement('td');
+        const delBtn = document.createElement('button');
+        delBtn.innerHTML = '删除';
+        delBtn.className = 'del';
+        td7.appendChild(delBtn);
+        delBtn.dataset.index = i;
+
+        // 把td加到tr
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        tr.appendChild(td5);
+        tr.appendChild(td6);
+        tr.appendChild(td7);
+
+        // 把tr加到tbody
+        tbody.appendChild(tr);
+      }
+    }
+
+    // 阻止表单默认提交行为
+    const addBtn = document.querySelector('.info');
+    addBtn.addEventListener('submit', function (e) {
+      e.preventDefault(); // 阻止表单提交刷新
+      const uname = document.querySelector('.uname').value;
+      const age = document.querySelector('.age').value;
+      const gender = document.querySelector('.gender').value;
+      const salary = document.querySelector('.salary').value;
+      const city = document.querySelector('.city').value;
+      // 创建一个学生对象
+      const student = {
+        uname: uname,
+        age: age,
+        gender: gender,
+        salary: salary,
+        city: city
+      };
+      students.push(student);
+      // 清空输入框
+      const forms = document.querySelector('.info')
+      forms.reset();
+      renderTable();
+    });
+
+    // 删除学生信息
+    const tbody = document.querySelector('tbody');
+    tbody.addEventListener('click', function (e) {
+      if (e.target.className === 'del') {
+        const index = e.target.dataset.index; // 获取索引
+        students.splice(index, 1);
+        renderTable();
+      }
+    });
+  </script>
+
+</body>
+
+</html>

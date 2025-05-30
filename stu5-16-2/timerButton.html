@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阅读协议定时按钮</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      padding: 36px 32px 28px 32px;
+      min-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .agreement-box {
+      width: 100%;
+      max-width: 320px;
+      height: 140px;
+      background: #f7fafd;
+      border: 1.5px solid #b2bec3;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      padding: 16px;
+      overflow-y: auto;
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.7;
+      box-sizing: border-box;
+    }
+
+    #btn {
+      width: 180px;
+      padding: 12px 0;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+      color: #fff;
+      cursor: not-allowed;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.08);
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+
+    #btn:enabled {
+      background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+      color: #222;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="agreement-box">
+      <strong>用户协议（模拟）</strong><br>
+      欢迎使用本网站服务。请您仔细阅读以下协议内容：<br>
+      1. 您的个人信息将受到严格保护。<br>
+      2. 请勿发布违法、违规内容。<br>
+      3. 使用本网站即表示您同意本协议的所有条款。<br>
+      4. 如有疑问，请联系客服。<br>
+      <br>
+      感谢您的配合与支持！
+    </div>
+    <button id="btn" value="请阅读协议"></button>
+  </div>
+  <script>
+    const btn = document.querySelector('#btn')
+    btn.disabled = true;
+    let timer = 5
+    btn.innerText = `请阅读协议(${timer})`
+    const intervalId = setInterval(() => {
+      timer--
+      btn.innerText = `请阅读协议(${timer})`
+      if (timer <= 0) {
+        clearInterval(intervalId)
+        btn.innerText = `我已阅读完协议`
+        btn.disabled = false
+      }
+    }, 1000);
+  </script>
+</body>
+
+</html>

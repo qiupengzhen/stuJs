@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Count Demo</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f6fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .center-box {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      padding: 32px 36px 24px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 340px;
+    }
+
+    .input-row {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    textarea {
+      width: 240px;
+      height: 80px;
+      resize: none;
+      font-size: 1rem;
+      padding: 8px 10px;
+      border: 1.5px solid #007bff;
+      border-radius: 6px;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    textarea:focus {
+      border: 2px solid #ff7e5f;
+    }
+
+    .count {
+      margin-top: 14px;
+      color: #888;
+      font-size: 0.98rem;
+      align-self: flex-end;
+    }
+
+    .count.over {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+
+    .preview-label {
+      margin-top: 18px;
+      color: #007bff;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-align: left;
+      width: 100%;
+      display: none;
+    }
+
+    .preview-box {
+      width: 100%;
+      min-height: 36px;
+      margin-top: 6px;
+      background: #f1f3f6;
+      border: 1.5px solid #b2bec3;
+      border-radius: 6px;
+      color: #333;
+      font-size: 1rem;
+      padding: 10px 14px;
+      box-sizing: border-box;
+      word-break: break-all;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.06);
+      transition: box-shadow 0.2s;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="center-box">
+    <div class="input-row">
+      <textarea id="inputArea" maxlength="200" placeholder="发表一条友善的评论"></textarea>
+    </div>
+    <div class="count" id="wordCount">0/200</div>
+    <div class="preview-label" id="previewLabel">内容预览：</div>
+    <div class="preview-box" id="previewBox"></div>
+  </div>
+  <script>
+    const inputArea = document.getElementById('inputArea');
+    const wordCount = document.getElementById('wordCount');
+    const previewLabel = document.getElementById('previewLabel');
+    const previewBox = document.getElementById('previewBox');
+
+    inputArea.addEventListener('input', () => {
+      // 判断最后一个字符是否为回车
+      let value = inputArea.value;
+      // 过滤掉所有回车符（\n 或 \r），只统计非回车的字符数
+      let WordsCount = value.replace(/[\r\n]/g, '').length;
+      wordCount.textContent = `${WordsCount}/200`;
+    });
+
+    inputArea.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        previewLabel.style.display = 'block';
+        previewBox.style.display = 'block';
+        previewBox.textContent = inputArea.value;
+      }
+    });
+  </script>
+</body>
+
+</html>

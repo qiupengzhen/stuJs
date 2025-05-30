@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+  <div id="joke"></div>
+  <button id="getJoke">获取笑话</button>
+  <script>
+    // 封装获取笑话的函数
+    function fetchJoke() {
+      axios.get('https://official-joke-api.appspot.com/random_joke')
+        .then(function (response) {
+          document.getElementById('joke').innerHTML = `
+            <p><strong>笑话:</strong> ${response.data.setup}</p>
+            <p><strong>答案:</strong> ${response.data.punchline}</p>
+          `;
+        })
+        .catch(function (error) {
+          console.error('数据获取失败:', error);
+        });
+    }
+
+    // 页面加载时先获取一次
+    fetchJoke();
+
+    // 点击按钮重新获取笑话
+    document.getElementById('getJoke').addEventListener('click', fetchJoke);
+  </script>
+</body>
+
+</html>

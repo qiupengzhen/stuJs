@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // js对象的使用
+    // 定义一个对象
+    const person = {
+      name: 'John',
+      age: 30,
+      greet: function () {
+        console.log(`Hello, my name is ${this.name}`);
+      }
+    };
+    console.log(person); // 输出: { name: 'John', age: 30, greet: [Function: greet] }
+    // 使用对象的方法
+    person.greet(); // 输出: Hello, my name is John
+
+    // 修改对象的属性
+    person.age = 31;
+    console.log(person.age); // 输出: 31
+
+    // 添加新的属性
+    person.city = 'New York';
+    console.log(person.city); // 输出: New York
+
+    // 遍历对象
+    for (let key in person) {
+      console.log(`${key}: ${person[key]}`);
+    }
+  </script>
+</body>
+
+</html>

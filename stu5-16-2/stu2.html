@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div data-info="12313" data-xx="2313">自定义属性</div>
+  <script>
+    const div = document.querySelector('div')
+    console.log(div.dataset.info) // 12313
+    console.log(div.dataset) // 2313
+  </script>
+</body>
+
+</html>

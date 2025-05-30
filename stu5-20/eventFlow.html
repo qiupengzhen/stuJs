@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件流动演示</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f6fa;
+      font-family: Arial, sans-serif;
+    }
+    .outer {
+      width: 320px;
+      height: 220px;
+      background: #e3f2fd;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .middle {
+      width: 200px;
+      height: 120px;
+      background: #bbdefb;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .inner {
+      width: 100px;
+      height: 60px;
+      background: #90caf9;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      color: #1565c0;
+    }
+    .log {
+      margin-top: 24px;
+      background: #fff;
+      border-radius: 6px;
+      padding: 12px 18px;
+      min-height: 36px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      font-size: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="outer" id="outer">
+      <div class="middle" id="middle">
+        <div class="inner" id="inner">点我</div>
+      </div>
+    </div>
+    <div class="log" id="log">事件流日志：</div>
+  </div>
+  <script>
+    const log = document.getElementById('log');
+    function addLog(msg) {
+      log.innerHTML += `<br>${msg}`;
+    }
+
+    document.getElementById('outer').addEventListener('click', function(e) {
+      addLog('外层捕获/冒泡阶段');
+    }, false); // 冒泡阶段
+
+    document.getElementById('middle').addEventListener('click', function(e) {
+      addLog('中层捕获/冒泡阶段');
+    }, false);
+
+    document.getElementById('inner').addEventListener('click', function(e) {
+      addLog('内层捕获/冒泡阶段');
+    }, false);
+
+    // 捕获阶段监听（第三个参数为true）
+    document.getElementById('outer').addEventListener('click', function(e) {
+      addLog('外层捕获阶段');
+    }, true);
+
+    document.getElementById('middle').addEventListener('click', function(e) {
+      addLog('中层捕获阶段');
+    }, true);
+
+    document.getElementById('inner').addEventListener('click', function(e) {
+      addLog('内层捕获阶段');
+    }, true);
+  </script>
+</body>
+</html>

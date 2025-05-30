@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>随机三国人物</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>随机三国人物</h1>
+    <p id="character"></p>
+    <button onclick="location.reload()">刷新页面</button>
+  </div>
+
+  <script>
+    // 定义三国人物数组
+    let characters = ['刘备', '关羽', '张飞', '诸葛亮', '曹操', '孙权', '周瑜', '吕布', '赵云', '黄忠', '马超'];
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    // 定义一个函数来随机选择三国人物
+
+
+    // 显示随机选择的三国人物
+    document.getElementById('character').textContent = '随机选择的三国人物是：' + characters[randomIndex];;
+
+    characters.splice(randomIndex, 1);
+    console.log(characters)
+  </script>
+</body>
+
+</html>

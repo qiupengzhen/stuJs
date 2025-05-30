@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>切换模板</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f6fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .switch-box {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      padding: 32px 40px 28px 40px;
+      min-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .switch-nav {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .switch-nav li a {
+      text-decoration: none;
+      color: #007bff;
+      font-size: 1.1rem;
+      padding: 6px 18px;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+      display: block;
+    }
+
+    .switch-nav li a.active {
+      background: #007bff;
+      color: #fff;
+    }
+
+    .switch-content {
+      width: 260px;
+      min-height: 60px;
+      background: #f1f3f6;
+      border-radius: 8px;
+      padding: 18px 16px;
+      color: #333;
+      font-size: 1rem;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .switch-content>div {
+      display: none;
+    }
+
+    .switch-content>div.active {
+      display: block;
+    }
+
+    .change {
+      color: #e74c3c;
+      font-weight: bold;
+      background: #ffeaea;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="switch-box">
+    <ul class="switch-nav">
+      <li><a href="#" class="active">内容一</a></li>
+      <li><a href="#">内容二</a></li>
+      <li><a href="#">内容三</a></li>
+    </ul>
+    <div class="switch-content">
+      <div class="active">这里是内容一</div>
+      <div>这里是内容二</div>
+      <div>这里是内容三</div>
+    </div>
+  </div>
+  <script>
+    const aList = document.querySelectorAll('.switch-nav a');
+
+    aList.forEach((a, index) => {
+      a.addEventListener('mouseenter', (e) => {
+        aList.forEach(item => item.classList.remove('active'));
+        a.classList.add('active');
+
+      });
+    });
+
+    aList.forEach((a, index) => {
+      a.addEventListener('click', (e) => {
+        const contentDivs = document.querySelectorAll('.switch-content>div');
+        contentDivs.forEach(div => div.classList.remove('active'));
+        contentDivs[index].classList.add('active');
+        contentDivs[index].innerHTML = `这里是内容${index + 1} <span class="change">切换了</span>`;
+      });
+    });
+
+
+  </script>
+</body>
+
+</html>

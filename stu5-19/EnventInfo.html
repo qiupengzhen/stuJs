@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" value="" />
+  <script>
+    // 1. 获取输入框元素
+    const input = document.querySelector('input')
+
+    // 2. 添加事件监听器
+    input.addEventListener('keyup', function (event) {
+      alert('我按下的是：' + event.key)
+    })
+
+
+  </script>
+</body>
+
+</html>

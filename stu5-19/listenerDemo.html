@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    .box {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+      padding: 32px 28px 24px 28px;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .box h2 {
+      margin: 0 0 18px 0;
+      color: #ff7e5f;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+    }
+
+    .question {
+      min-height: 40px;
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .btns {
+      display: flex;
+      gap: 18px;
+    }
+
+    button {
+      padding: 8px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: linear-gradient(90deg, #ff7e5f 0%, #feb47b 100%);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(255, 126, 95, 0.08);
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #feb47b 0%, #ff7e5f 100%);
+      color: #222;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>随机问答</h2>
+    <div class="question" id="question">点击“开始”获取一个问题</div>
+    <div class="btns">
+      <button id="startBtn">开始</button>
+      <button id="endBtn">结束</button>
+    </div>
+  </div>
+  <script>
+    const questions = [
+      "你最喜欢的编程语言是什么？",
+      "你平时喜欢做什么运动？",
+      "你最想去哪个国家旅游？",
+      "你最喜欢的电影是哪一部？",
+      "你觉得前端开发最有趣的地方是什么？"
+    ]
+    const questionElement = document.getElementById('question')
+    const startBtn = document.getElementById('startBtn')
+    const endBtn = document.getElementById('endBtn')
+    let s = null
+    let randomIndex = null
+    startBtn.addEventListener('click', () => {
+      if (questions.length === 0) {
+        questionElement.textContent = '所有问题已抽完！';
+        clearInterval(s)
+        startBtn.disabled = true
+        return;
+      }
+
+      if (s !== null) return;
+      s = setInterval(() => {
+        randomIndex = Math.floor(Math.random() * questions.length)
+        questionElement.textContent = questions[randomIndex]
+      }, 100)
+
+
+    })
+    endBtn.addEventListener('click', () => {
+
+      clearInterval(s)
+      s = null;
+      questions.splice(randomIndex, 1)
+
+
+    })
+  </script>
+
+</body>
+
+</html>

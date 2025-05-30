@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+      /* 页面淡入动画 */
+      animation: fadeInBody 1.2s;
+    }
+
+    @keyframes fadeInBody {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    header {
+      background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+      animation: slideDown 1s;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-60px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      animation: popIn 1s 0.3s backwards;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    nav {
+      background: linear-gradient(90deg, #0056b3 0%, #0099cc 100%);
+      padding: 10px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0, 86, 179, 0.08);
+      animation: fadeInNav 1.2s 0.2s backwards;
+    }
+
+    @keyframes fadeInNav {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.2rem;
+      transition: color 0.2s, transform 0.2s;
+      position: relative;
+      display: inline-block;
+    }
+
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #ffd700;
+      transition: width 0.3s;
+      margin: 0 auto;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+      color: #ffd700;
+      transform: scale(1.1);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .lang-switch {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      z-index: 20;
+      animation: fadeInLang 1.2s 0.5s backwards;
+    }
+
+    @keyframes fadeInLang {
+      from {
+        opacity: 0;
+        right: 0;
+      }
+
+      to {
+        opacity: 1;
+        right: 30px;
+      }
+    }
+
+    .lang-switch button {
+      background: #fff;
+      color: #007bff;
+      border: 1px solid #007bff;
+      border-radius: 5px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-left: 10px;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      box-shadow: 0 2px 6px rgba(0, 123, 255, 0.08);
+    }
+
+    .lang-switch button.active,
+    .lang-switch button:hover {
+      background: #007bff;
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    section {
+      padding: 20px;
+      max-width: 800px;
+      margin: 20px auto;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInSection 0.8s forwards;
+      animation-delay: 0.7s;
+      margin-bottom: 32px;
+    }
+
+    section h2 {
+      margin-top: 0;
+      color: #007bff;
+      letter-spacing: 1px;
+      position: relative;
+      animation: fadeInSectionTitle 1s 1s backwards;
+    }
+
+    @keyframes fadeInSection {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInSectionTitle {
+      from {
+        opacity: 0;
+        left: -30px;
+      }
+
+      to {
+        opacity: 1;
+        left: 0;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      background: linear-gradient(90deg, #333 0%, #555 100%);
+      color: white;
+      margin-top: 20px;
+      letter-spacing: 1px;
+      font-size: 1rem;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+      animation: fadeInFooter 1.2s 1.2s backwards;
+    }
+
+    @keyframes fadeInFooter {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-start;
+      margin-top: 10px;
+    }
+
+    .skills span {
+      background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgba(0, 123, 255, 0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: popInSkill 0.6s;
+    }
+
+    .skills span:hover {
+      transform: scale(1.15) rotate(-3deg);
+      box-shadow: 0 4px 16px rgba(0, 123, 255, 0.18);
+      background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
+    }
+
+    @keyframes popInSkill {
+      from {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="lang-switch">
+    <button id="enBtn" class="active">English</button>
+    <button id="zhBtn">中文</button>
+  </div>
+  <header>
+    <h1 id="title">Zhang San's Personal Website</h1>
+    <p id="subtitle">Front-end Developer | Passionate about Technology | Lifelong Learner</p>
+  </header>
+
+  <nav>
+    <a href="#about" id="nav-about">Resume</a>
+    <a href="#influence" id="nav-influence">Influence</a>
+    <a href="#code" id="nav-code">Code</a>
+    <a href="#interest" id="nav-interest">Interests</a>
+    <a href="#books" id="nav-books">Books</a>
+    <a href="#skills" id="nav-skills">Skills</a>
+    <a href="#projects" id="nav-projects">Projects</a>
+    <a href="#contact" id="nav-contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2 id="about-title">About Me</h2>
+    <p id="about-content">Hello! I'm Zhang San, a passionate front-end developer with 3 years of experience, proficient
+      in HTML, CSS, JavaScript, and modern frameworks such as React and Vue. I enjoy solving problems and constantly
+      challenging myself.</p>
+  </section>
+
+  <section id="influence">
+    <h2 id="influence-title">Influence</h2>
+    <p id="influence-content">Actively sharing in tech communities, owning Zhihu columns, CSDN blogs, 500+ stars on
+      GitHub projects, participating in open source and giving multiple tech talks.</p>
+  </section>
+
+  <section id="code">
+    <h2 id="code-title">Code</h2>
+    <p id="code-content">Proficient in mainstream front-end technologies, with clean and efficient code style, focusing
+      on maintainability and readability. GitHub: <a href="https://github.com/zhangsan"
+        target="_blank">github.com/zhangsan</a></p>
+  </section>
+
+  <section id="interest">
+    <h2 id="interest-title">Interests</h2>
+    <p id="interest-content">Enjoy programming, reading, basketball, traveling, and photography. Passionate about
+      exploring new technologies and fields.</p>
+  </section>
+
+  <section id="books">
+    <h2 id="books-title">Books</h2>
+    <ul id="books-list">
+      <li>JavaScript: The Definitive Guide</li>
+      <li>You Don't Know JS</li>
+      <li>Deep Dive into React and Redux</li>
+      <li>Code Complete</li>
+      <li>The Mythical Man-Month</li>
+    </ul>
+  </section>
+
+  <section id="skills">
+    <h2 id="skills-title">Skills</h2>
+    <div class="skills" id="skills-list">
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JavaScript</span>
+      <span>React</span>
+      <span>Vue</span>
+      <span>Node.js</span>
+      <span>Git</span>
+      <span>Webpack</span>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 id="projects-title">Projects</h2>
+    <p id="projects-content">Here are some projects I have participated in:</p>
+    <ul id="projects-list">
+      <li><strong>Personal Blog System:</strong> A full-stack blog system developed with React and Node.js.</li>
+      <li><strong>E-commerce Website:</strong> An e-commerce platform based on Vue and Firebase, supporting user
+        registration, shopping cart, and payment functions.</li>
+      <li><strong>Weather App:</strong> A real-time weather app built with HTML, CSS, and JavaScript.</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2 id="contact-title">Contact</h2>
+    <p id="contact-content">If you are interested in my work, feel free to contact me:</p>
+    <p>Email: zhangsan@example.com</p>
+    <p>Phone: 123-456-7890</p>
+    <p>GitHub: <a href="https://github.com/zhangsan" target="_blank">github.com/zhangsan</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/zhangsan" target="_blank">linkedin.com/in/zhangsan</a></p>
+  </section>
+
+  <footer>
+    <p id="footer">&copy; 2025 Zhang San's Personal Website. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // 中英文内容
+    const content = {
+      en: {
+        title: "Zhang San's Personal Website",
+        subtitle: "Front-end Developer | Passionate about Technology | Lifelong Learner",
+        nav: ["Resume", "Influence", "Code", "Interests", "Books", "Skills", "Projects", "Contact"],
+        aboutTitle: "About Me",
+        aboutContent: "Hello! I'm Zhang San, a passionate front-end developer with 3 years of experience, proficient in HTML, CSS, JavaScript, and modern frameworks such as React and Vue. I enjoy solving problems and constantly challenging myself.",
+        influenceTitle: "Influence",
+        influenceContent: "Actively sharing in tech communities, owning Zhihu columns, CSDN blogs, 500+ stars on GitHub projects, participating in open source and giving multiple tech talks.",
+        codeTitle: "Code",
+        codeContent: 'Proficient in mainstream front-end technologies, with clean and efficient code style, focusing on maintainability and readability. GitHub: <a href="https://github.com/zhangsan" target="_blank">github.com/zhangsan</a>',
+        interestTitle: "Interests",
+        interestContent: "Enjoy programming, reading, basketball, traveling, and photography. Passionate about exploring new technologies and fields.",
+        booksTitle: "Books",
+        booksList: [
+          "JavaScript: The Definitive Guide",
+          "You Don't Know JS",
+          "Deep Dive into React and Redux",
+          "Code Complete",
+          "The Mythical Man-Month"
+        ],
+        skillsTitle: "Skills",
+        skillsList: ["HTML", "CSS", "JavaScript", "React", "Vue", "Node.js", "Git", "Webpack"],
+        projectsTitle: "Projects",
+        projectsContent: "Here are some projects I have participated in:",
+        projectsList: [
+          "<strong>Personal Blog System:</strong> A full-stack blog system developed with React and Node.js.",
+          "<strong>E-commerce Website:</strong> An e-commerce platform based on Vue and Firebase, supporting user registration, shopping cart, and payment functions.",
+          "<strong>Weather App:</strong> A real-time weather app built with HTML, CSS, and JavaScript."
+        ],
+        contactTitle: "Contact",
+        contactContent: "If you are interested in my work, feel free to contact me:",
+        footer: "&copy; 2025 Zhang San's Personal Website. All rights reserved."
+      },
+      zh: {
+        title: "张三的个人网站",
+        subtitle: "前端开发工程师 | 热爱技术 | 持续学习",
+        nav: ["个人简历", "影响力", "代码", "兴趣", "书籍", "技能", "项目展示", "联系我"],
+        aboutTitle: "关于我",
+        aboutContent: "你好！我是张三，一名热爱前端开发的工程师，拥有 3 年的开发经验，擅长 HTML、CSS、JavaScript 和现代框架（如 React 和 Vue）。我喜欢解决问题并不断挑战自己。",
+        influenceTitle: "影响力",
+        influenceContent: "在技术社区积极分享，拥有知乎专栏、CSDN 博客，GitHub 项目获 500+ star，参与开源项目并多次技术演讲。",
+        codeTitle: "代码",
+        codeContent: '熟练掌握前端主流技术，代码风格简洁高效，注重可维护性和可读性。GitHub 地址：<a href="https://github.com/zhangsan" target="_blank">github.com/zhangsan</a>',
+        interestTitle: "兴趣",
+        interestContent: "喜欢编程、阅读、篮球、旅行和摄影，热衷于探索新技术和新领域。",
+        booksTitle: "书籍",
+        booksList: [
+          "《JavaScript 高级程序设计》",
+          "《你不知道的JavaScript》",
+          "《深入浅出React与Redux》",
+          "《代码大全》",
+          "《人月神话》"
+        ],
+        skillsTitle: "技能",
+        skillsList: ["HTML", "CSS", "JavaScript", "React", "Vue", "Node.js", "Git", "Webpack"],
+        projectsTitle: "项目展示",
+        projectsContent: "以下是我参与的一些项目：",
+        projectsList: [
+          "<strong>个人博客系统：</strong> 使用 React 和 Node.js 开发的全栈博客系统。",
+          "<strong>电商网站：</strong> 基于 Vue 和 Firebase 的电商平台，支持用户注册、购物车和支付功能。",
+          "<strong>天气预报应用：</strong> 使用 HTML、CSS 和 JavaScript 构建的实时天气预报应用。"
+        ],
+        contactTitle: "联系我",
+        contactContent: "如果你对我的工作感兴趣，请随时联系我：",
+        footer: "&copy; 2025 张三的个人网站. 保留所有权利。"
+      }
+    };
+
+    function setLang(lang) {
+      // 标题和副标题
+      document.getElementById('title').textContent = content[lang].title;
+      document.getElementById('subtitle').textContent = content[lang].subtitle;
+
+      // 导航栏
+      document.getElementById('nav-about').textContent = content[lang].nav[0];
+      document.getElementById('nav-influence').textContent = content[lang].nav[1];
+      document.getElementById('nav-code').textContent = content[lang].nav[2];
+      document.getElementById('nav-interest').textContent = content[lang].nav[3];
+      document.getElementById('nav-books').textContent = content[lang].nav[4];
+      document.getElementById('nav-skills').textContent = content[lang].nav[5];
+      document.getElementById('nav-projects').textContent = content[lang].nav[6];
+      document.getElementById('nav-contact').textContent = content[lang].nav[7];
+
+      // 各 section 标题和内容
+      document.getElementById('about-title').textContent = content[lang].aboutTitle;
+      document.getElementById('about-content').textContent = content[lang].aboutContent;
+
+      document.getElementById('influence-title').textContent = content[lang].influenceTitle;
+      document.getElementById('influence-content').textContent = content[lang].influenceContent;
+
+      document.getElementById('code-title').textContent = content[lang].codeTitle;
+      document.getElementById('code-content').innerHTML = content[lang].codeContent;
+
+      document.getElementById('interest-title').textContent = content[lang].interestTitle;
+      document.getElementById('interest-content').textContent = content[lang].interestContent;
+
+      document.getElementById('books-title').textContent = content[lang].booksTitle;
+      // 书籍列表
+      const booksList = document.getElementById('books-list');
+      booksList.innerHTML = '';
+      content[lang].booksList.forEach(book => {
+        const li = document.createElement('li');
+        li.textContent = book;
+        booksList.appendChild(li);
+      });
+
+      document.getElementById('skills-title').textContent = content[lang].skillsTitle;
+      // 技能标签
+      const skillsList = document.getElementById('skills-list');
+      skillsList.innerHTML = '';
+      content[lang].skillsList.forEach(skill => {
+        const span = document.createElement('span');
+        span.textContent = skill;
+        skillsList.appendChild(span);
+      });
+
+      document.getElementById('projects-title').textContent = content[lang].projectsTitle;
+      document.getElementById('projects-content').textContent = content[lang].projectsContent;
+      // 项目列表
+      const projectsList = document.getElementById('projects-list');
+      projectsList.innerHTML = '';
+      content[lang].projectsList.forEach(project => {
+        const li = document.createElement('li');
+        li.innerHTML = project;
+        projectsList.appendChild(li);
+      });
+
+      document.getElementById('contact-title').textContent = content[lang].contactTitle;
+      document.getElementById('contact-content').textContent = content[lang].contactContent;
+
+      document.getElementById('footer').innerHTML = content[lang].footer;
+
+      // 按钮高亮
+      document.getElementById('enBtn').classList.toggle('active', lang === 'en');
+      document.getElementById('zhBtn').classList.toggle('active', lang === 'zh');
+    }
+
+    // 绑定按钮事件
+    document.getElementById('enBtn').onclick = () => setLang('en');
+    document.getElementById('zhBtn').onclick = () => setLang('zh');
+
+    // section 动画延迟递增
+    window.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section');
+      sections.forEach((sec, idx) => {
+        sec.style.animationDelay = (0.7 + idx * 0.15) + 's';
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>地区查询</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Roboto', Arial, sans-serif;
+    }
+
+    .region-box {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+      padding: 36px 40px 32px 40px;
+      min-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .region-box h2 {
+      margin: 0 0 24px 0;
+      color: #ff6f91;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 22px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .form-row label {
+      font-size: 1rem;
+      color: #333;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-row input {
+      padding: 6px 12px;
+      border: 1.5px solid #ffb6b9;
+      border-radius: 6px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .form-row input:focus {
+      border: 2px solid #ff6f91;
+    }
+
+    #searchBtn {
+      margin-top: 8px;
+      padding: 8px 28px;
+      background: linear-gradient(90deg, #ffb6b9 0%, #ff6f91 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.08rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(255, 111, 145, 0.08);
+      transition: background 0.2s;
+    }
+
+    #searchBtn:hover {
+      background: linear-gradient(90deg, #ff6f91 0%, #ffb6b9 100%);
+    }
+
+    #result {
+      margin-top: 26px;
+      width: 100%;
+      min-height: 36px;
+      background: #f8f8fa;
+      border-radius: 8px;
+      padding: 16px 18px;
+      color: #333;
+      font-size: 1.08rem;
+      box-sizing: border-box;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    #result ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    #result li {
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+      color: #ff6f91;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="region-box">
+    <h2>地区查询</h2>
+    <div class="form-row">
+      <label>
+        省：<input type="text" id="province" placeholder="请输入省份">
+      </label>
+      <label>
+        市：<input type="text" id="city" placeholder="请输入城市">
+      </label>
+    </div>
+    <button id="searchBtn">查询</button>
+    <div id="result"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    document.getElementById('searchBtn').addEventListener('click', function () {
+      regionSearch();
+    });
+    function regionSearch() {
+      axios.get('http://hmajax.itheima.net/api/area', {
+        params: {
+          pname: document.getElementById('province').value,
+          cname: document.getElementById('city').value
+        }
+      })
+        .then(function (response) {
+          const resultDiv = document.getElementById('result');
+          const list = response.data.list;
+          if (Array.isArray(list) && list.length > 0) {
+            resultDiv.innerHTML = '<ul>' + list.map(item => `<li>${item}</li>`).join('') + '</ul>';
+          } else {
+            resultDiv.innerHTML = '没有查询到相关地区';
+          }
+        })
+        .catch(function (error) {
+          document.getElementById('result').innerHTML = '数据获取失败，请重试';
+        });
+    }
+  </script>
+</body>
+
+</html>

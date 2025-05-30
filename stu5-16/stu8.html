@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>传智年会抽奖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #74ebd5 0%, #ACB6E5 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      padding: 40px 60px;
+      text-align: center;
+      min-width: 320px;
+      animation: fadeIn 1s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 20px 0;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #007bff;
+      background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 1.3rem;
+      color: #333;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <p>传智年会抽奖</p>
+    <h1>一等奖</h1>
+    <h2>二等奖</h2>
+    <h3>三等奖</h3>
+  </div>
+  <script>
+    const arr = ['刘德华', '张学友', '周杰伦']
+    const titles = [
+      document.querySelector('h1'),
+      document.querySelector('h2'),
+      document.querySelector('h3')
+    ]
+    const awards = ['一等奖', '二等奖', '三等奖']
+
+    for (let i = 0; i < 3; i++) {
+      const randomIndex = Math.floor(Math.random() * arr.length)
+      titles[i].innerText = awards[i] + '：' + arr[randomIndex]
+      arr.splice(randomIndex, 1)
+    }
+  </script>
+</body>
+
+</html>

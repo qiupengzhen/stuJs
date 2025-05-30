@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品表格全选示例</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f6fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .table-container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      min-width: 480px;
+      background: #fff;
+    }
+
+    th,
+    td {
+      border: 1px solid #e0e0e0;
+      padding: 10px 18px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    th {
+      background: #f1f3f6;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) td {
+      background: #fafbfc;
+    }
+
+    .checkbox-cell {
+      width: 90px;
+      /* 增大宽度，保证横排 */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th class="checkbox-cell" style="text-align: left;">
+            <label style="display: flex; align-items: center; gap: 6px;">
+              <input type="checkbox" id="checkAll">
+              <span>全选</span>
+            </label>
+          </th>
+          <th>商品</th>
+          <th>商家</th>
+          <th>价格</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="checkbox-cell"><input type="checkbox" class="item-check"></td>
+          <td>无线鼠标</td>
+          <td>京东自营</td>
+          <td>￥59.00</td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><input type="checkbox" class="item-check"></td>
+          <td>机械键盘</td>
+          <td>天猫旗舰店</td>
+          <td>￥199.00</td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><input type="checkbox" class="item-check"></td>
+          <td>蓝牙耳机</td>
+          <td>苏宁易购</td>
+          <td>￥129.00</td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><input type="checkbox" class="item-check"></td>
+          <td>显示器</td>
+          <td>京东自营</td>
+          <td>￥899.00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    const checkAll = document.getElementById('checkAll');
+    const itemChecks = document.querySelectorAll('.item-check');
+    let checkNum = 0;
+    checkAll.addEventListener('click', function () {
+      for (let i = 0; i < itemChecks.length; i++) {
+        // 将全选框的状态赋值给每个商品的复选框
+        itemChecks[i].checked = this.checked;
+      }
+    });
+    for (let i = 0; i < itemChecks.length; i++) {
+      itemChecks[i].addEventListener('click', function () {
+        // 统计选中的复选框数量
+        checkNum = 0;
+        for (let j = 0; j < itemChecks.length; j++) {
+          if (itemChecks[j].checked) {
+            checkNum++;
+          }
+        }
+        // 如果所有商品都被选中，则全选框也被选中
+        checkAll.checked = checkNum === itemChecks.length;
+      });
+    }
+
+  </script>
+</body>
+
+</html>

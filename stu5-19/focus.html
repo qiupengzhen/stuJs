@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>焦点事件练习</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f6fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .center-box {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      width: 220px;
+      padding: 8px 12px;
+      font-size: 1rem;
+      border: 1.5px solid #007bff;
+      border-radius: 6px;
+      outline: none;
+      margin-bottom: 24px;
+      transition: border 0.2s;
+    }
+
+    input[type="text"]:focus {
+      border: 2px solid #ff7e5f;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 220px;
+    }
+
+    li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    .list {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="center-box">
+    <input type="text" id="myInput" placeholder="请输入内容，试试焦点事件">
+    <ul class="list">
+      <li>小米</li>
+      <li>苹果</li>
+      <li>华为</li>
+    </ul>
+  </div>
+  <script>
+    const input = document.getElementById('myInput');
+
+
+    input.addEventListener('focus', () => {
+      console.log('输入框获得焦点');
+      const list = document.querySelector('.list');
+      list.style.display = 'block';
+    });
+
+    input.addEventListener('blur', () => {
+      console.log('输入框失去焦点');
+      const list = document.querySelector('.list');
+      list.style.display = 'none';
+    });
+
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        console.log('按下了回车键');
+        const list = document.querySelector('.list');
+        list.style.display = 'none';
+      }
+    });
+
+    input.addEventListener('input', () => {
+      console.log('输入内容变化');
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+
+  </div>
+
+  <script>
+    // 1. 创建一个日期对象
+    const date = new Date();
+    console.log(date.toLocaleString)
+    document.querySelector("div").innerHTML = date.toLocaleString()
+    setInterval(() => {
+      const date = new Date();
+      document.querySelector("div").innerHTML = date.toLocaleString()
+    }, 1000);
+  </script>
+
+</body>
+
+</html>

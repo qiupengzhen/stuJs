@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f6fa;
+  }
+
+  div {
+    width: 250px;
+    height: 300px;
+    background-color: #93202b;
+    transition: all 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    color: #fff;
+
+  }
+
+  p {
+    color: #fff;
+
+  }
+
+  h2 {
+    color: #fff;
+  }
+
+  h3 {
+    color: #fff;
+  }
+</style>
+
+<body>
+  <div>
+    <p>111</p>
+    <h1>下班倒计时</h1>
+    <h2>倒计时：</h2>
+    <h3>18:30:00下课</h3>
+  </div>
+  <script>
+    const p = document.querySelector('p');
+    // 获取当前时间
+    const now = new Date();
+    p.innerHTML = '今天是' + now.toLocaleDateString();
+
+    // 获取下班时间
+    const endTime = new Date('2025-05-23 18:30:00').getTime();
+
+    function countdown() {
+      // 获取当前时间戳
+      const nowTime = new Date().getTime();
+      // 计算剩余时间
+      const remainingTime = endTime - nowTime;
+      // 计算小时、分钟、秒数
+      const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+      const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+      // 显示倒计时
+      document.querySelector('h2').innerHTML = hours + '小时' + minutes + '分钟' + seconds + '秒';
+    }
+    if (endTime > now.getTime()) {
+      countdown();
+      setInterval(countdown, 1000);
+    } else {
+      clearInterval(countdownTimer);
+      document.querySelector('h2').innerHTML = '下班时间已到';
+    }
+  </script>
+</body>
+
+</html>
